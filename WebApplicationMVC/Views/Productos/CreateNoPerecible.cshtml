@@ -1,0 +1,31 @@
+﻿@model WebApplicationMVC.Models.ProductoNoPerecible
+
+@{
+    ViewBag.Title = "Crear Producto No Perecible";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.Partial("_CamposProductoBase", Model)
+
+        <!-- Campo Envasado (Dropdown) -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.EnvasadoId, "Tipo de Envasado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("EnvasadoId", null, "-- Seleccione Envasado --", htmlAttributes: new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.EnvasadoId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
